@@ -1,5 +1,6 @@
 {
   "name": "achaea-map-json",
+  "type": "module",
   "dependencies": {
     "mudlet-map-binary-reader": "^1.0.0"
   }
