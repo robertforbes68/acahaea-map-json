@@ -1,0 +1,31 @@
+name: Daily Map Update
+on:
+  schedule:
+    - cron: '0 0 * * *' 
+  workflow_dispatch: 
+
+jobs:
+  update-map:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install Dependencies
+        run: npm install
+        
+      - name: Download Official map.dat
+        run: curl -O https://raw.githubusercontent.com/IRE-Mudlet-Mapping/AchaeaCrowdmap/development/Map/map.dat
+        
+      - name: Convert to JSON
+        run: node convert.js
+        
+      - name: Commit and Push Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Automated daily map.json update"
+          file_pattern: 'map.json'
