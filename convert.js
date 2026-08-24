@@ -1,4 +1,4 @@
-import { MudletMapReader } from "mudlet-map-binary-reader";
+const { MudletMapReader } = require("mudlet-map-binary-reader");
 
 // Read the binary map and export it directly to JSON
 const map = MudletMapReader.read("map.dat");
